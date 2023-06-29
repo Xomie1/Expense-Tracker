@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: tobiakindele30@gmail.com
+Date: Tue, 27 Jun 2023 12:23:28 -0000
+Message-ID: <168786860828.18016.6342623344474228230@LAPTOP-RLD53O25>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/MQ/bqgfv4-6bfc28aba5c47d063dc52860c39f4fea/
+
+Your username, in case you’ve forgotten: tobi
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
