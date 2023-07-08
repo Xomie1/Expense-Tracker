@@ -164,6 +164,17 @@ nav {
     cursor: pointer;
 }
 
+.exportCSV-btn{
+    width: 100px;
+    height: 40px;
+    font-size: 1.4rem;
+    border: 2px solid var(--para-color);
+    border-radius: 25px;
+    background-color: var(--white);
+    justify-content: center;
+    cursor: pointer;
+}
+
 .main-title .dashborad-title h1 {
     font-size: 3.3rem;
     color: var(--text-color);
@@ -494,5 +505,138 @@ footer {
   
   .form-container button[type="submit"]:hover {
     background-color: #5854D8;
+  }
+  
+  .graphbox{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    min-height: 200px;
+    grid-gap: 30px;
+
+    }
+
+    .graphbox .box{
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    max-width: 990px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    height:auto;
+    
+    }
+
+    #barChart {
+    width: 500px;
+    min-height: 200px;
+    /* Add more styles as needed */
+    }
+  
+    #polarAreaChart {
+    width: 990px;
+    min-height: 300px;
+    /* Add more styles as needed */
+    }
+  
+    
+@media screen and (max-width: 768px) {
+    /* Adjust the styles for screens up to 768px width */
+  
+      .graphbox{
+          grid-template-columns: 1fr;
+          height: auto;
+      }
+  
+    .container {
+      max-width: 90%;
+      padding-inline: 10px;
+    }
+  
+    .addBudget,
+    .addExpense {
+      width: 100%;
+    }
+  
+    .expenseSection {
+      flex-direction: column;
+    }
+  
+    .expense-list-card,
+    .income-expense-cards {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    /* Adjust the styles for screens up to 480px width */
+  
+    .graphbox{
+      grid-template-columns: 1fr;
+      height: auto;
+  }
+  
+  
+    body {
+      font-size: 55%;
+    }
+  
+    .container {
+      max-width: 90%;
+      padding-inline: 5px;
+    }
+  
+    .main-title .dashborad-title h1 {
+      font-size: 2.8rem;
+    }
+  
+    .main-title .dashborad-title p {
+      font-size: 1.5rem;
+    }
+  
+    .addBudget,
+    .addExpense {
+      padding: 20px;
+    }
+  
+    .expenseCard,
+    .incomeCard {
+      height: 120px;
+      padding: 15px;
+    }
+  
+    .income-expense-cards>div>h2 {
+      font-size: 1.4rem;
+    }
+  
+    .income-expense-cards>div>h1 {
+      font-size: 2.8rem;
+    }
+  
+    .listITems .item .list-expense-title-desc .list-expense-title {
+      font-size: 1.3rem;
+    }
+  
+    .list-expense-title-desc .list-expense-desc {
+      font-size: 1.2rem;
+    }
+  
+    .list-expense-amount span {
+      font-size: 1.6rem;
+    }
+  
+    .list-expense-amount .date {
+      font-size: 1.1rem;
+    }
+  
+    .footer-text {
+      font-size: 1.2rem;
+    }
+  
+    .footer-social-icons a ion-icon {
+      font-size: 2rem;
+    }
   }
   
