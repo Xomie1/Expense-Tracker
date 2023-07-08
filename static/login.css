@@ -1,0 +1,74 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    background-image: url(https://cdn.datacamp.com/main-app/assets/rebrand/backgrounds/sign-in-01a6c894c2c039d4d395b8f490c13555c5d53e6948f55199bd7515682994cd6f.svg)
+}
+
+#expense-tracker {
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    padding: 40px;
+    color: #fff;
+    text-align: center;
+    border: 2px #4285f4;
+    border: outset;
+    border-radius: 10px;
+    background: linear-gradient(to top right, #4285f4, #f5f5f5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.form-container form {
+    margin-bottom: 20px;
+}
+
+.form-container input[type="email"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #3367d6;
+}
+
+.text-input {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 250px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    background-color: #f7f7f7;
+}
