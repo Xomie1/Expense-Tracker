@@ -133,40 +133,32 @@ class List_data {
 
 //  Add Expense to Respective Feilds 
 
-add_expense_btn.addEventListener(
-    'click', (e) => {
-
-        e.preventDefault();
-
-        if (budget.innerText === "NGN 00,000.00")
-            alert("Please Add Budget First!");
-
-        else {
-            if ((expenseTitle.value.length > 0 && expenseDesc.value.length > 0 && expenseAmount.value > 0 && date.value.length > 0)) {
-
-                // The Code Create Expense Items using Class and push it to the array;
-
-
-                if (budgetNumber >= expenseAmount.value) {
-                    let expenseItem = new List_data(expenseTitle.value, expenseDesc.value, expenseAmount.value, date.value);
-                    arrOfItems.push(expenseItem);
-
-
-                    createExpenseList(arrOfItems[index].title, arrOfItems[index].desc, arrOfItems[index].amount, arrOfItems[index].date);
-                    expArray.push(Number(expenseAmount.value));
-                    index++;
-
-                    expenseNumber = Number(expenseAmount.value);
-                }
-
-                console.log(expenseNumber);
-                updateBudget();
-                reset();
-            }
+add_expense_btn.addEventListener('click', (e) => {
+    e.preventDefault();
+  
+    if (budget.innerText === "NGN 00,000.00")
+      alert("Please Add Budget First!");
+    else {
+      if (expenseTitle.value.length > 0 && expenseDesc.value.length > 0 && expenseAmount.value > 0 && date.value.length > 0) {
+  
+        if (budgetNumber >= expenseAmount.value) {
+          let expenseItem = new List_data(expenseTitle.value, expenseDesc.value, expenseAmount.value, date.value);
+          arrOfItems.push(expenseItem);
+  
+          createExpenseList(arrOfItems[index].title, arrOfItems[index].desc, arrOfItems[index].amount, arrOfItems[index].date);
+          expArray.push(Number(expenseAmount.value));
+          index++;
+  
+          expenseNumber = Number(expenseAmount.value);
         }
-        // Call exportCSV function to generate and download the CSV file
-        exportCSV();
-    });
+  
+        console.log(expenseNumber);
+        updateBudget();
+        reset();
+      }
+    }
+    updateChart();
+  });
 
 // Function To Calculate Budget and Expense:
 
@@ -208,6 +200,7 @@ function reset() {
 }
 
 // Function to Export CSV
+// // Function to export the expense data as a CSV file
 const exportCSV = () => {
     // Create CSV data string
     let csvContent = "data:text/csv;charset=utf-8,";
@@ -219,7 +212,7 @@ const exportCSV = () => {
       const title = item.querySelector(".list-expense-title").innerText;
       const desc = item.querySelector(".list-expense-desc").innerText;
       const amount = item.querySelector("span").innerText;
-      const date = item.querySelector(".date").value;
+      const date = item.querySelector(".date").innerText;
       const rowData = `${title},${desc},${amount},${date}\n`;
       csvContent += rowData;
     });
@@ -231,16 +224,123 @@ const exportCSV = () => {
     link.setAttribute("download", "expenses.csv");
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   }
-  var expenseDate = document.getElementById("date").value;
-
-// Format the date using JavaScript's Date object
-var formattedDate = new Date(expenseDate).toLocaleDateString();
-
-// Add the formatted date to the CSV row
-    row.push(formattedDate);
   
   // Add event listener to the export CSV button
   const exportCSVButton = document.querySelector("#exportCSV");
-  exportCSVButton.addEventListener("click", exportCSV);
+
+exportCSVButton.addEventListener("click", () => {
+  // Temporarily remove the event listener from the Add Expense button
+  add_expense_btn.removeEventListener("click", exportCSV);
+  // Call exportCSV function to generate and download the CSV file
+  exportCSV();
+  // Add the event listener back after the CSV export is complete
+  setTimeout(() => {
+    add_expense_btn.addEventListener("click", exportCSV);
+  }, 100);
+});
+  
+
+  // Function to update the chart
+function updateChart() {
+    var labels = arrOfItems.map(item => item.title);
+    var amounts = arrOfItems.map(item => item.amount);
+  
+    if (barChart) {
+      barChart.destroy(); // Destroy the previous bar chart if it exists
+    }
+  
+    if (polarAreaChart) {
+      polarAreaChart.destroy(); // Destroy the previous polar area chart if it exists
+    }
+  
+    barChart = buildBarChart("Expenses", labels, amounts);
+    polarAreaChart = buildPolarAreaChart("Expenses", labels, amounts);
+  }
+  
+  // Function to build the bar chart
+  function buildBarChart(chartTitle, labels, amounts) {
+    var ctx = document.getElementById("barChart").getContext("2d");
+  
+    var chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: chartTitle,
+            data: amounts,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+            responsive: true,
+      }
+    });
+  
+    return chart;
+  }
+  
+  // Function to build the polar area chart
+  function buildPolarAreaChart(chartTitle, labels, amounts) {
+    var ctx = document.getElementById("polarAreaChart").getContext("2d");
+  
+    var chart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: chartTitle,
+            data: amounts,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+      }
+    });
+  
+    return chart;
+  }
+  
+  // Initialize the charts
+  var barChart = buildBarChart("Expenses", [], []);
+  var polarAreaChart = buildPolarAreaChart("Expenses", [], []);
+  
   
