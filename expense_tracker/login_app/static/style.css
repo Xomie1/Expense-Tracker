@@ -19,7 +19,7 @@ body {
 body {
     width: 100%;
     height: 100%;
-    background-image: url(./assest/bg3.png);
+    background-image: url(/expense_tracker/login_app/static/assest/bg3.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -192,7 +192,7 @@ nav {
     justify-content: center;
     color: var(--white) !important;
     border-radius: 20px;
-    background-image: url(./assest/Slice\ 1.jpg);
+    background-image: url(/expense_tracker/login_app/static/assest/Slice\ 1.jpg);
     background-position: center;
     background-size: cover;
     box-shadow: 0px 0px 25px #3d3ba486;
